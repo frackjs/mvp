@@ -1,33 +1,13 @@
-const ast = {
-  name: 'products', 
-  methods: [{
-    name: 'getOne',
-    args: ['id'],
-  },{
-    name: 'getOne',
-    args: ['params'],
-  },{
-    name: 'getOne',
-    args: ['params'],
-  },{
-    name: 'getOne',
-    args: ['id', 'params'],
-  },{
-    name: 'getOne',
-    args: ['id'],
-  }]
-}
-
 const __ = "  ";
 
 const generateRoute = (objName, method) => (
-  "app.get('/"+objName+"/"+method.name+"/:id', (req, res) => {"+'\n'+
-    __+method.args.map(arg => "const "+arg+" = req.params['"+arg+"']" + '\n')+
-    __+"const data = "+objName+"."+method.name+"("+'\n'+
-    __+__+method.args.map(x => x + "," + '\n')+
-    __+")"+'\n'+
-    __+"res.json(data)"+'\n'+
-  "});"
+  __+"app.get('/"+objName+"/"+method.name+"/:id', (req, res) => {"+'\n'+
+  __+__+method.args.map(arg => "const "+arg+" = req.params['"+arg+"']").join("\n"+__+__)+"\n"+
+  __+__+"const data = "+objName+"."+method.name+"("+'\n'+
+  __+__+__+method.args.map(x => x + ",").join("\n"+__+__+__)+"\n"+
+  __+__+")"+'\n'+
+  __+__+"res.json(data)"+'\n'+
+  __+"});"
 )
 
-console.log( generateRoute(ast.name, ast.methods[0]) )
+module.exports = generateRoute
