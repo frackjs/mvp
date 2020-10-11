@@ -16,14 +16,18 @@ function getFileAst(filename, cb){
       const clean = l.trim()
       const match = matchMethodLine(clean, model)
       if(match !== ''){
-        const methodName = clean.split(model + '.')[1].split('=')[0].trim()
-        const args = clean.split('function(')[1].split(')')[0].split(',').map(x => x.trim())
-        ast.methods.push({ name: methodName, args: args })
+        ast.methods.push(getMethodAst(clean, model))
       }
     });
     
     cb(ast)
   })
+}
+
+function getMethodAst(line, objName){
+  const methodName = line.split(objName + '.')[1].split('=')[0].trim()
+  const args = line.split('(')[1].split(')')[0].split(',').map(x => x.trim())
+  return { name: methodName, args: args }
 }
 
 function matchMethodLine(str, objName){
