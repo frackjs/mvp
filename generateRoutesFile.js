@@ -32,34 +32,44 @@ function generateRoutes(ast){
   }).join("\n\n")
 }
 
-function generateRoutesFile(ast){
-  return "const products = require('../server/products')"+'\n\n'+
-  "module.exports = function productsRoutes(app){"+'\n\n'+
-  generateRoutes(ast)+'\n'+
-  '}'
+function createDirectoryChain(directory){
+  
+  let prevDir = ''
+  directory.split('/').forEach(d => {
+    if(prevDir!==''){
+      d = prevDir + '/' + d
+    }
+
+    if (!fs.existsSync(d)){
+      fs.mkdirSync(d);
+      prevDir = d
+    }
+  })
 }
 
-const dname = config.serverDir.concat('/routes')
-const fname = ast.name+'Routes.js'
+function buildFileContent(ast){
+  return "const products = require('../server/products');"+'\n\n'+
+  "module.exports = function productsRoutes(app){"+'\n\n'+
+  generateRoutes(ast)+'\n'+
+  '};'
+}
 
-let prevD = ''
-dname.split('/').forEach(d => {
-  console.log(prevD)
-  if(prevD!==''){
-    d = prevD + '/' + d
-  }
-  console.log('try -- ' + d)
-  if (!fs.existsSync(d)){
-    fs.mkdirSync(d);
-    prevD = d
-  }
-})
+function generateRoutesFile(ast){
 
-fs.writeFile([dname,fname].join('/'), generateRoutesFile(ast), function(err) {
-  if(err) {
-    console.log(err)
-  }
-  else{
-    console.log("Generated -- " + [dname,fname].join('/'))
-  }
-})
+  const content = buildFileContent(ast)
+  const directory = config.serverDir.concat('/routes')
+  const filename = ast.name+'Routes.js'
+
+  createDirectoryChain(directory)
+
+  fs.writeFile([directory,filename].join('/'), content, function(err) {
+    if(err) {
+      console.log(err)
+    }
+    else{
+      console.log("Generated -- " + [directory,filename].join('/'))
+    }
+  })
+}
+
+generateRoutesFile(ast)
