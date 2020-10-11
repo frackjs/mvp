@@ -43,7 +43,7 @@ function matchMethodLine(str, objName){
   return r === null ? '' : r[0]
 }
 
-getFileAst('./test-files/products.js', o => console.log(o))
+module.exports = getFileAst;
 
 /*
 ---------------
