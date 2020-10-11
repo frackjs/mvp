@@ -26,8 +26,15 @@ function getFileAst(filename, cb){
 
 function getMethodAst(line, objName){
   const methodName = line.split(objName + '.')[1].split('=')[0].trim()
-  const args = line.split('(')[1].split(')')[0].split(',').map(x => x.trim())
-  return { name: methodName, args: args }
+  const isSingleArgArrowFunction = line.match('=>') !== null && line.match(/\)\s*\=\>/) === null
+  let args;
+  if(isSingleArgArrowFunction){
+    args = [ line.split('=')[1].trim() ]
+  }
+  else{
+    args = line.split('(')[1].split(')')[0].split(',').map(x => x.trim())
+  }
+  return { name: methodName, args: args.join(' | ') }
 }
 
 function matchMethodLine(str, objName){

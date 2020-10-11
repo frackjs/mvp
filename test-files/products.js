@@ -13,7 +13,7 @@ products.getOne = function(id){
   return db.products.find(p => p.id === id)
 }
 
-products.getMany = params => {
+products.getMany = function(params){
   return db.products
 }
 
@@ -25,7 +25,7 @@ products.create = function(params){
   })
 }
 
-products.update = (id, params) => {
+products.update = function(id, params){
   const item = this.getOne(id)
   item.name = params.name
   item.price = params.price
