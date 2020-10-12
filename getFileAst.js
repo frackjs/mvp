@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-function getFileAst(filename, cb){
+function getFileAst(filename, callback){
 
   fs.readFile(filename, 'utf8', function(err, data){
 
@@ -20,7 +20,7 @@ function getFileAst(filename, cb){
       }
     });
     
-    cb(ast)
+    callback(ast)
   })
 }
 
@@ -34,7 +34,7 @@ function getMethodAst(line, objName){
   else{
     args = line.split('(')[1].split(')')[0].split(',').map(x => x.trim())
   }
-  return { name: methodName, args: args.join(' | ') }
+  return { name: methodName, args: args }
 }
 
 function matchMethodLine(str, objName){
@@ -43,29 +43,4 @@ function matchMethodLine(str, objName){
   return r === null ? '' : r[0]
 }
 
-module.exports = getFileAst;
-
-/*
----------------
-SAMPLE FILE AST
----------------
-{
-  name: 'products', 
-  methods: [{
-    name: 'getOne',
-    args: ['id'],
-  },{
-    name: 'getOne',
-    args: ['params'],
-  },{
-    name: 'getOne',
-    args: ['params'],
-  },{
-    name: 'getOne',
-    args: ['id', 'params'],
-  },{
-    name: 'getOne',
-    args: ['id'],
-  }]
-}
-  */
+module.exports = getFileAst
