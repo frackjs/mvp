@@ -1,29 +1,10 @@
 const generateRoute = require('./generateRoute')
+const getFileAst = require('./getFileAst')
 const fs = require('fs');
 
-const config = { 
+const config = {
   serverDir: 'server',
   clientSrc: 'client/src'
-}
-
-const ast = {
-  name: 'products', 
-  methods: [{
-    name: 'getOne',
-    args: ['id'],
-  },{
-    name: 'getMany',
-    args: ['params'],
-  },{
-    name: 'create',
-    args: ['params'],
-  },{
-    name: 'update',
-    args: ['id', 'params'],
-  },{
-    name: 'delete',
-    args: ['id'],
-  }]
 }
 
 function generateRoutes(ast){
@@ -72,4 +53,6 @@ function generateRoutesFile(ast){
   })
 }
 
-generateRoutesFile(ast)
+getFileAst('./test-files/products.js', (ast) => {
+  generateRoutesFile(ast)
+})

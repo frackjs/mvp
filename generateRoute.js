@@ -27,7 +27,7 @@ const generateRoute = (objName, method) => (
   __+"app.get('/"+kebab(objName)+"/"+kebab(method.name)+"/:id', (req, res) => {"+'\n'+
   __+__+method.args.map(arg => "const "+arg+" = req.params['"+arg+"']").join("\n"+__+__)+"\n"+
   __+__+"const data = "+objName+"."+method.name+"("+'\n'+
-  __+__+__+method.args.map(x => x + ",").join("\n"+__+__+__)+"\n"+
+  __+__+__+method.args.join(",\n"+__+__+__)+"\n"+
   __+__+")"+'\n'+
   __+__+"res.json(data)"+'\n'+
   __+"});"
