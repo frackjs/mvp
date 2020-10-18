@@ -1,15 +1,11 @@
 const generateRoute = require('./generateRoute')
 const getFileAst = require('./getFileAst')
-const generateFile = require('./generateFile')
-
-function generateRoutes(ast) {
-  return ast.methods.map((method) => generateRoute(ast.name, method)).join('\n\n')
-}
+const { generateFile, generateItems } = require('./util')
 
 function buildContent(ast) {
   return `const products = require('../server/products');\n\n${
     ''}module.exports = function productsRoutes(app){\n\n${
-    generateRoutes(ast)}\n};`
+    generateItems(ast, generateRoute)}\n};`
 }
 
 getFileAst('./test-files/products.js', (ast) => {

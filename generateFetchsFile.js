@@ -1,15 +1,11 @@
 const generateFetch = require('./generateFetch')
 const getFileAst = require('./getFileAst')
-const generateFile = require('./generateFile')
-
-function generateFetchs(ast) {
-  return ast.methods.map((method) => generateFetch(ast.name, method)).join('\n\n')
-}
+const { generateFile, generateItems } = require('./util')
 
 function buildContent(ast) {
   return `import axios from 'axios';\n\n${
     ''}const ${ast.name} = {};\n\n${
-    generateFetchs(ast)}\n`
+    generateItems(ast, generateFetch)}\n`
 }
 
 getFileAst('./test-files/products.js', (ast) => {

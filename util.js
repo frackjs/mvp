@@ -17,7 +17,7 @@ function createDirectoryChain(directory) {
   })
 }
 
-module.exports = function generateFile(ast, directory, filename, content) {
+function generateFile(ast, directory, filename, content) {
   createDirectoryChain(directory)
 
   fs.writeFile([directory, filename].join('/'), content, (err) => {
@@ -28,3 +28,9 @@ module.exports = function generateFile(ast, directory, filename, content) {
     }
   })
 }
+
+function generateItems(ast, generateEach) {
+  return ast.methods.map((method) => generateEach(ast.name, method)).join('\n\n')
+}
+
+module.exports = { generateItems, generateFile }
