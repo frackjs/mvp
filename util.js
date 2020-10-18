@@ -12,8 +12,9 @@ function createDirectoryChain(directory) {
 
     if (!fs.existsSync(curr)) {
       fs.mkdirSync(curr)
-      prevDir = curr
     }
+
+    prevDir = curr
   })
 }
 
