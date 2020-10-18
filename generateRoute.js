@@ -1,21 +1,20 @@
-const __ = "  ";
+const xx = "  "
 
-let cache = {}
+const cache = {}
 
 const kebab = (camel) => {
-  if(camel.toLowerCase()===camel){
+  if (camel.toLowerCase() === camel) {
     return camel
   }
-  if(cache[camel] !== undefined){
+  if (cache[camel] !== undefined) {
     return cache[camel]
   }
   const letters = camel.split('')
-  let out = []
-  letters.forEach(x => {
-    if(x.toLowerCase() === x) { // lower
+  const out = []
+  letters.forEach((x) => {
+    if (x.toLowerCase() === x) { // lower
       out.push(x)
-    }
-    else { // upper
+    } else { // upper
       out.push('-')
       out.push(x.toLowerCase())
     }
@@ -23,14 +22,16 @@ const kebab = (camel) => {
   return out.join('')
 }
 
+const renderEachArg = (arg) => `const ${arg} = req.params['${arg}']`
+
 const generateRoute = (objName, method) => (
-  __+"app.get('/"+kebab(objName)+"/"+kebab(method.name)+"/:id', (req, res) => {"+'\n'+
-  __+__+method.args.map(arg => "const "+arg+" = req.params['"+arg+"']").join("\n"+__+__)+"\n"+
-  __+__+"const data = "+objName+"."+method.name+"("+'\n'+
-  __+__+__+method.args.join(",\n"+__+__+__)+"\n"+
-  __+__+")"+'\n'+
-  __+__+"res.json(data)"+'\n'+
-  __+"});"
+  `  app.get('/${kebab(objName)}/${kebab(method.name)}/:id', (req, res) => {\n${
+    xx}  ${method.args.map(renderEachArg).join(`\n    `)}\n${
+    xx}  const data = ${objName}.${method.name}(\n${
+    xx}    ${method.args.join(`,\n      `)}\n${
+    xx}  )\n${
+    xx}  res.json(data)\n${
+    xx}});`
 )
 
 module.exports = generateRoute

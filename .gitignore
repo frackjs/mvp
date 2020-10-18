@@ -1,2 +1,4 @@
+push
+node_modules
 server
 .DS_Store
