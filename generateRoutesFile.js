@@ -2,11 +2,6 @@ const fs = require('fs')
 const generateRoute = require('./generateRoute')
 const getFileAst = require('./getFileAst')
 
-const config = {
-  serverDir: 'server',
-  clientSrc: 'client/src',
-}
-
 function generateRoutes(ast) {
   return ast.methods.map((method) => generateRoute(ast.name, method)).join('\n\n')
 }
@@ -35,7 +30,7 @@ function buildFileContent(ast) {
 
 function generateRoutesFile(ast) {
   const content = buildFileContent(ast)
-  const directory = config.serverDir.concat('/routes')
+  const directory = 'routes'
   const filename = `${ast.name}Routes.js`
 
   createDirectoryChain(directory)

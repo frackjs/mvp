@@ -1,4 +1,4 @@
 push
 node_modules
-server
+routes
 .DS_Store
