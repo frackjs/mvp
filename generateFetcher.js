@@ -24,7 +24,7 @@ const kebab = (camel) => {
 
 const httpType = 'get'
 
-module.exports = function generateFetch(objName, method) {
+module.exports = function generateFetcher(objName, method) {
   const pathVars = method.args.map((arg) => (
     arg !== 'params' ? ` + '/' + ${arg}` : ''
   )).join('')
@@ -41,6 +41,6 @@ module.exports = function generateFetch(objName, method) {
   return out
 }
 
-// const out = generateFetch('products', { name: 'update', args: ['id', 'params'] })
+// const out = generateFetcher('products', { name: 'update', args: ['id', 'params'] })
 
 // console.log(out)
