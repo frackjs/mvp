@@ -8,6 +8,6 @@ function buildContent(ast) {
     generateItems(ast, generateFetcher)}\n`
 }
 
-getFileAst('./test-files/products.js', (ast) => {
+getFileAst('./actions/products.js', (ast) => {
   generateFile(ast, 'client/src/server', 'products.js', buildContent(ast))
 })

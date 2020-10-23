@@ -25,7 +25,7 @@ const kebab = (camel) => {
 const renderEachArg = (arg) => `const ${arg} = req.params['${arg}']`
 
 const generateRoute = (objName, method) => (
-  `  app.get('/${kebab(objName)}/${kebab(method.name)}/:id', (req, res) => {\n${
+  `  app.get('/${kebab(objName)}/${kebab(method.name)}${method.args.filter((x) => x !== 'params').map((x) => `/:${x}`).join()}', (req, res) => {\n${
     xx}  ${method.args.map(renderEachArg).join(`\n    `)}\n${
     xx}  const data = ${objName}.${method.name}(\n${
     xx}    ${method.args.join(`,\n      `)}\n${
