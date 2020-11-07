@@ -8,6 +8,8 @@ function buildContent(ast) {
     generateItems(ast, generateRoute)}\n};`
 }
 
-getFileAst('./actions/products.js', (ast) => {
-  generateFile(ast, 'routes', 'productsRoutes.js', buildContent(ast))
-})
+module.exports = function generateRoutesFile() {
+  getFileAst('./actions/products.js', (ast) => {
+    generateFile(ast, 'routes', 'productsRoutes.js', buildContent(ast))
+  })
+}
