@@ -1,5 +1,3 @@
-const xx = "  "
-
 const cache = {}
 
 const kebab = (camel) => {
@@ -35,13 +33,16 @@ const generateRoute = (objName, method) => {
   if (method.name.indexOf('delete') === 0) {
     verb = 'delete'
   }
-  return `  app.${verb}('/${kebab(objName)}/${kebab(method.name)}${method.args.filter((x) => x !== 'params').map((x) => `/:${x}`).join()}', (req, res) => {\n${
-    xx}  ${method.args.map(renderEachArg).join(`\n    `)}\n${
-    xx}  const data = ${objName}.${method.name}(\n${
-    xx}    ${method.args.join(`,\n      `)}\n${
-    xx}  )\n${
-    xx}  res.json(data)\n${
-    xx}});`
+
+  let out = ''
+  out += `  app.${verb}('/${kebab(objName)}/${kebab(method.name)}${method.args.filter((x) => x !== 'params').map((x) => `/:${x}`).join()}', (req, res) => {\n`
+  out += `    ${method.args.map(renderEachArg).join(`\n    `)}\n`
+  out += `    const data = ${objName}.${method.name}(\n`
+  out += `      ${method.args.join(`,\n      `)}\n`
+  out += `    )\n`
+  out += `    res.json(data)\n`
+  out += `  });`
+  return out
 }
 
 module.exports = generateRoute
