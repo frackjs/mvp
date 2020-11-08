@@ -13,4 +13,4 @@ module.exports = {
     'semi': [2, 'never'],
     'quote-props': 0,
   },
-}
+};

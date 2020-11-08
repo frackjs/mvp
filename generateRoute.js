@@ -20,7 +20,7 @@ const kebab = (camel) => {
   return out.join('')
 }
 
-const renderEachArg = (arg) => `const ${arg} = req.params['${arg}']`
+const renderEachArg = (arg) => `const ${arg} = !isNaN(req.params.${arg}) ? parseInt(req.params.${arg}) : req.params.${arg};`
 
 const generateRoute = (objName, method) => {
   let verb = 'get'
@@ -37,10 +37,8 @@ const generateRoute = (objName, method) => {
   let out = ''
   out += `  app.${verb}('/${kebab(objName)}/${kebab(method.name)}${method.args.filter((x) => x !== 'params').map((x) => `/:${x}`).join()}', (req, res) => {\n`
   out += `    ${method.args.map(renderEachArg).join(`\n    `)}\n`
-  out += `    const data = ${objName}.${method.name}(\n`
-  out += `      ${method.args.join(`,\n      `)}\n`
-  out += `    )\n`
-  out += `    res.json(data)\n`
+  out += `    const data = ${objName}.${method.name}(${method.args.join(`, `)});\n`
+  out += `    res.json(data);\n`
   out += `  });`
   return out
 }
