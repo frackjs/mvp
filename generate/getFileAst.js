@@ -7,7 +7,7 @@ function getMethodAst(line, objName) {
   if (isSingleArgArrowFunction) {
     args = [line.split('=')[1].trim()]
   } else {
-    args = line.split('(')[1].split(')')[0].split(',').map((x) => x.trim())
+    args = line.split('(')[1].split(')')[0].split(',').map((x) => x.trim()).filter((x) => x !== '')
   }
   return { name: methodName, args }
 }

@@ -45,4 +45,8 @@ products.delete = function (id) {
   return db.products
 }
 
+products.foo = function(){
+  return 'Hello'
+}
+
 module.exports = products
