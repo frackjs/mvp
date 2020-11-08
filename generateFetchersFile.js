@@ -4,8 +4,21 @@ const { generateFile, generateItems } = require('./util')
 
 function buildContent(ast) {
   let out = ''
-  out += 'const get = function(url){ return fetch(url).then(r => r.json()) };\n'
-  out += 'const post = function(url, params){ return fetch(url, params).then(r => r.json()) };\n\n'
+  out += `const options = function(verb, params){
+  const options = {
+    method: verb,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=UTF-8'
+    },
+    body: JSON.stringify(params)
+  };
+}
+function getData(url){ return fetch(url).then(r => r.json()) };
+function postData(url, params){ return fetch(url, options('POST', params)).then(r => r.json()) };
+function putDate(url, params){ return fetch(url, options('PUT', params)).then(r => r.json()) };
+function deleteData(url, params){ return fetch(url, options('DELETE', params)).then(r => r.json()) };`
+  out += '\n\n'
   out += `const ${ast.name} = {};\n\n`
   out += `${generateItems(ast, generateFetcher)}\n`
   return out
