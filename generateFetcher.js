@@ -33,7 +33,7 @@ module.exports = function generateFetcher(objName, method) {
 
   out += `${kebab(objName)}.${method.name} = function(${method.args.join(', ')}) {\n`
   out += `  const path = '/${kebab(objName)}/${kebab(method.name)}'${pathVars};\n`
-  out += `  return axios.${httpType}(path`
+  out += `  return ${httpType}(path`
   out += method.args[method.args.length - 1] === 'params' ? ', params' : ''
   out += ');\n'
   out += `};`
