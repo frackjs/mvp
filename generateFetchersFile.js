@@ -8,8 +8,8 @@ function buildContent(ast) {
     generateItems(ast, generateFetcher)}\n`
 }
 
-module.exports = function generateFetchersFile() {
-  getFileAst('./actions/products.js', (ast) => {
-    generateFile(ast, 'client/src/actions', 'products.js', buildContent(ast))
+module.exports = function generateFetchersFile(actionsDir, clientSrcDir) {
+  getFileAst(`./${actionsDir}/products.js`, (ast) => {
+    generateFile(ast, `${clientSrcDir}/${actionsDir}`, 'products.js', buildContent(ast))
   })
 }

@@ -24,6 +24,7 @@
     "eslint-plugin-import": "^2.22.1"
   },
   "dependencies": {
+    "command-line-args": "^5.1.1",
     "express": "^4.17.1"
   }
 }

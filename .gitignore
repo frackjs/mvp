@@ -1,5 +1,5 @@
 push
 node_modules
 client
-routes
+actionsRoutes
 .DS_Store
