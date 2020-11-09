@@ -21,11 +21,13 @@ function queryStr(params){
 
 function getData(url, params){ return fetch(url + queryStr(params)).then(r => r.json()) };
 function postData(url, params){ return fetch(url, options('POST', params)).then(r => r.json()) };
-function putDate(url, params){ return fetch(url, options('PUT', params)).then(r => r.json()) };
+function putData(url, params){ return fetch(url, options('PUT', params)).then(r => r.json()) };
 function deleteData(url, params){ return fetch(url, options('DELETE', params)).then(r => r.json()) };`
   out += '\n\n'
   out += `const ${ast.name} = {};\n\n`
   out += `${generateItems(ast, generateFetcher)}\n`
+  out += `\n`
+  out += `module.exports = products`
   return out
 }
 
