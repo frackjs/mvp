@@ -28,7 +28,12 @@ function renderNewLineIf(args) {
   return args.length === 0 ? '' : '\n'
 }
 
-const renderEachArg = (arg) => `const ${arg} = !isNaN(req.params.${arg}) ? parseInt(req.params.${arg}) : req.params.${arg};`
+function renderEachArg(arg, verb) {
+  if (arg !== 'params') {
+    return `const ${arg} = !isNaN(req.params.${arg}) ? parseInt(req.params.${arg}) : req.params.${arg};`
+  }
+  return `const params = req.${verb === 'get' ? 'query' : 'body'}`
+}
 
 const generateRoute = (objName, method) => {
   let verb = 'get'
@@ -46,7 +51,7 @@ const generateRoute = (objName, method) => {
   out += `  app.${verb}('/${kebab(objName)}/${kebab(method.name)}${method.args.filter((x) => x !== 'params').map((x) => `/:${x}`).join()}', (req, res) => {\n`
   out += renderTabIf(method.args)
   out += `${method.args.map(renderEachArg).join(`\n    `)}`
-  out += renderNewLineIf(method.args)
+  out += renderNewLineIf(method.args, verb)
   out += `    const data = ${objName}.${method.name}(${method.args.join(`, `)});\n`
   out += `    res.json(data);\n`
   out += `  });`
