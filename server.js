@@ -1,12 +1,13 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 const productsRoutes = require('./actionsRoutes/productsRoutes')
 
 const app = express()
 const port = 3001
 
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+app.use(cors())
+app.use(bodyParser.json())
 
 productsRoutes(app)
 
