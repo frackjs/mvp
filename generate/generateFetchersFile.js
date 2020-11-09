@@ -5,7 +5,7 @@ const { generateFile, generateItems } = require('./util')
 function buildContent(ast) {
   let out = ''
   out += `const options = function(verb, params){
-  const options = {
+  return {
     method: verb,
     headers: {
       'Accept': 'application/json',
@@ -14,7 +14,12 @@ function buildContent(ast) {
     body: JSON.stringify(params)
   };
 }
-function getData(url){ return fetch(url).then(r => r.json()) };
+
+function queryStr(params){
+  return new URLSearchParams(params).toString()
+}
+
+function getData(url, params){ return fetch(url + queryStr(params)).then(r => r.json()) };
 function postData(url, params){ return fetch(url, options('POST', params)).then(r => r.json()) };
 function putDate(url, params){ return fetch(url, options('PUT', params)).then(r => r.json()) };
 function deleteData(url, params){ return fetch(url, options('DELETE', params)).then(r => r.json()) };`
