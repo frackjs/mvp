@@ -3,14 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "watch": {
-    "generate": "actions/*.js"
-  },
   "scripts": {
-    "serve": "nodemon server.js",
+    "serve": "nodemon server.js && npm-watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate": "node generate/index.js --actions actions --clientSrc client/src",
-    "watch": "npm-watch"
+    "generate": "node generate/index.js --actions actions --clientSrc client/src"
   },
   "repository": {
     "type": "git",

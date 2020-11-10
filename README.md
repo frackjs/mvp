@@ -68,15 +68,17 @@ Set up a proxy server inside the *React app's* `package.json`:
   "proxy": "http://localhost:3001", // ADD THIS
 ```
 
-The repo comes with some server-side functions inside `/actions/products.js`, so you can just run the watcher to start generating the corresponding routes and fetchers.
+The repo comes with some sample server-side functions in the `/actions` folder, there's a `products.js` file there that contains some `products` related functions.
+
+You can run the server to start generating the corresponding routes and fetchers.
 
 ```
-npm run watch
+npm run serve
 ```
 
 Whenever the `/actions/products.js` file is changed, the generator will produce the new versions of routes and fetchers. By the default, the routes will be created in `/actionsRoutes` and the fetchers will be placed in `/client/src/actions`. And by default FrackJS will look for the source functions from the `/actions` folder in the root directory.
 
-Before we can run the server with these newly generated routes, we have to import the new routes file inside `server.js`:
+We have to import the generated routes file in `server.js`:
 
 ```js
 const express = require('express')
@@ -94,18 +96,14 @@ productsRoutes(app) // ADD
 ...
 ```
 
-Now we can start the API server:
-```cmd
-npm run serve
-```
+Open a new console and start the React app as well:
 
-Open a new console, and start the React app:
 ```cmd
-cd client
+cd mvp/client
 npm start
 ```
 
-Now in the React code, you should be able to *import* and *call* the `products` functions directly:
+Now in the React code, you should be able to *import* and *call* the backend `products` functions as if they're in the frontend:
 
 ```js
 import { useState, useEffect } from 'react';
