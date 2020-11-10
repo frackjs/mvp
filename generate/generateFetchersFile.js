@@ -31,8 +31,8 @@ function deleteData(url, params){ return fetch(url, options('DELETE', params)).t
   return out
 }
 
-module.exports = function generateFetchersFile(actionsDir, clientSrcDir) {
-  getFileAst(`./${actionsDir}/products.js`, (ast) => {
-    generateFile(ast, `${clientSrcDir}/${actionsDir}`, 'products.js', buildContent(ast))
+module.exports = function generateFetchersFile(actionsDir, clientSrcDir, name) {
+  getFileAst(`./${actionsDir}/${name}.js`, (ast) => {
+    generateFile(ast, `${clientSrcDir}/${actionsDir}`, `${name}.js`, buildContent(ast))
   })
 }

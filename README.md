@@ -78,13 +78,13 @@ npm run serve
 
 Whenever the `/actions/products.js` file is changed, the generator will produce the new versions of routes and fetchers. By the default, the routes will be created in `/actionsRoutes` and the fetchers will be placed in `/client/src/actions`. And by default FrackJS will look for the source functions from the `/actions` folder in the root directory.
 
-We have to import the generated routes file in `server.js`:
+The generated `productRoutes` file also got imported and used in `server.js` automatically:
 
 ```js
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const productsRoutes = require('./actionsRoutes/productsRoutes') // ADD
+const productsRoutes = require('./actionsRoutes/productsRoutes')
 
 const app = express()
 const port = 3001
@@ -92,7 +92,7 @@ const port = 3001
 app.use(cors())
 app.use(bodyParser.json())
 
-productsRoutes(app) // ADD
+productsRoutes(app)
 ...
 ```
 

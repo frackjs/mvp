@@ -1,3 +1,4 @@
+const fs = require('fs')
 const commandLineArgs = require('command-line-args')
 const generateFetchersFile = require('./generateFetchersFile')
 const generateRoutesFile = require('./generateRoutesFile')
@@ -13,5 +14,8 @@ const optionDefinitions = [
 
 const options = commandLineArgs(optionDefinitions)
 
-generateFetchersFile(options.actions, options.clientSrc)
-generateRoutesFile(options.actions)
+fs.readdirSync(options.actions).forEach((f) => {
+  const name = f.split('.')[0]
+  generateFetchersFile(options.actions, options.clientSrc, name)
+  generateRoutesFile(options.actions, name)
+})
