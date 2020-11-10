@@ -45,11 +45,12 @@ The development experience would be like:
 
 ### Try it out
 
-First, clone this repo into your computer.
+First, clone this repo into your computer, and install the dependencies:
 
 ```cmd
 git clone https://github.com/frackjs/mvp.git
 cd mvp
+npm install
 ```
 
 Create a React app inside the folder:
@@ -58,7 +59,7 @@ Create a React app inside the folder:
 npx create-react-app client
 ```
 
-Set up a proxy server inside the react app's `package.json`:
+Set up a proxy server inside the *React app's* `package.json`:
 ```js
 {
   "name": "client",
@@ -93,18 +94,18 @@ productsRoutes(app) // ADD
 ...
 ```
 
-Now we can run the server:
+Now we can start the API server:
 ```cmd
-npm serve
+npm run serve
 ```
 
-Let's also run the React app:
+Open a new console, and start the React app:
 ```cmd
 cd client
 npm start
 ```
 
-Now in the React app, you should be able to *import* and *call* the `products` functions directly:
+Now in the React code, you should be able to *import* and *call* the `products` functions directly:
 
 ```js
 import { useState, useEffect } from 'react';
