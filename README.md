@@ -136,4 +136,4 @@ function App() {
 
 export default App;
 ```
-Technically, we're just calling the fetchers mapped to the server functions, with the same set of names.
+Technically, we're just calling the fetchers mapped to the server functions, with the same set of names. The actual functions were created in `../../actions/` while the corresponding fetch functions are located in `./actions/`, but since the fetch functions will be automatically generated, it should feel like you're calling the actual functions on the server (with `async` and `await` of course).
