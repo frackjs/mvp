@@ -84,21 +84,21 @@ Normally, you would also have to set up `npm-watch`, but this demo app comes wit
 
 This repo also comes with some sample server-side functions in the `/actions` folder, there's a `products.js` file there that contains some `products` related functions.
 
-You can run the server to start generating the corresponding routes and fetchers.
+Now, we can run the server to start generating the corresponding routes and fetchers.
 
 ```
-npm run watch 
+npm run frack-watch 
 ```
 
 Whenever the `/actions/products.js` file is changed, the generator will produce the new versions of routes and fetchers. By the default, the routes will be created in `/actionsRoutes` and the fetchers will be placed in `/client/src/actions`. And by default FrackJS will look for the source functions from the `/actions` folder in the root directory.
 
-The generated `productRoutes` file also got imported and used in `server.js` automatically:
+So far, the routes are only generated, they aren't being used by the Express app. We have to import/use the generated routes file in `server.js`:
 
 ```js
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const productsRoutes = require('./actionsRoutes/productsRoutes')
+const productsRoutes = require('./actionsRoutes/productsRoutes') // ADD THIS
 
 const app = express()
 const port = 3001
@@ -106,7 +106,7 @@ const port = 3001
 app.use(cors())
 app.use(bodyParser.json())
 
-productsRoutes(app)
+productsRoutes(app) // ADD THIS
 ...
 ```
 
