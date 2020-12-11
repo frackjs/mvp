@@ -1,0 +1,25 @@
+{
+  "name": "frackjs",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frackjs/frackjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "frack": "./bin/frackjs"
+  },
+  "bugs": {
+    "url": "https://github.com/frackjs/frackjs/issues"
+  },
+  "homepage": "https://github.com/frackjs/frackjs#readme",
+  "dependencies": {
+    "command-line-args": "^5.1.1"
+  }
+}

@@ -3,3 +3,6 @@ node_modules
 client
 actionsRoutes
 .DS_Store
+frackjs/.git
+frackjs/.gitignor
+frackjs/node_modules

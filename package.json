@@ -4,12 +4,11 @@
   "description": "",
   "main": "server.js",
   "watch": {
-    "generate": "actions/*.js"
+    "generate": "actions"
   },
   "scripts": {
     "serve": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "generate": "node generate/index.js --actions actions --clientSrc client/src",
+    "generate": "frack",
     "watch": "npm-watch"
   },
   "repository": {
@@ -33,6 +32,10 @@
     "body-parser": "^1.19.0",
     "command-line-args": "^5.1.1",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "frackjs": "file:frackjs",
+    "hello": "file:hello",
+    "install": "^0.13.0",
+    "npm": "^6.14.9"
   }
 }

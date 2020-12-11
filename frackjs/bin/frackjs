@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+const commandLineArgs = require('command-line-args')
+const start = require("../index.js")
+
+const optionDefinitions = [
+  {
+    name: 'actions', type: String, defaultValue: 'actions',
+  },
+  {
+    name: 'clientSrc', type: String, defaultValue: 'client/src',
+  },
+]
+
+const options = commandLineArgs(optionDefinitions)
+
+start(options)
