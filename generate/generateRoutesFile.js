@@ -9,7 +9,7 @@ function buildContent(ast) {
     ''}module.exports = function productsRoutes(app){\n${
     generateItems(ast, generateRoute)}\n};`
 }
-
+/*
 function insertRouteImports(actionsDir, name) {
   fs.readFile('./server.js', 'utf8', (err, data) => {
     const file = `./${actionsDir}Routes/${name}Routes.js`
@@ -19,10 +19,11 @@ function insertRouteImports(actionsDir, name) {
     fs.writeFile('./server.js', str.replace('// import routes', `// import routes\n${importLine}`).replace('// use routes', `// use routes\n${useLine}`), () => {})
   })
 }
+*/
 
 module.exports = function generateRoutesFile(actionsDir, name) {
   getFileAst(`./${actionsDir}/${name}.js`, (ast) => {
     generateFile(ast, `${actionsDir}Routes`, `${name}Routes.js`, buildContent(ast))
-    insertRouteImports(actionsDir, name)
+    // insertRouteImports(actionsDir, name)
   })
 }
