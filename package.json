@@ -4,12 +4,12 @@
   "description": "",
   "main": "server.js",
   "watch": {
-    "generate": "actions"
+    "frack": "actions"
   },
   "scripts": {
-    "serve": "nodemon server.js",
-    "generate": "frack",
-    "watch": "npm-watch"
+    "frack": "frack",
+    "frack-watch": "npm-watch",
+    "serve": "nodemon server.js"
   },
   "repository": {
     "type": "git",
