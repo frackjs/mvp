@@ -52,6 +52,7 @@ git clone https://github.com/frackjs/mvp.git
 cd mvp
 npm install
 ```
+This `install` will install the frackjs package to the sample project. This version of frackjs is from the folder frackjs, not from the NPM registry. (Since this is a demo, I want to have the sample project and the library itself all in the same repo.)
 
 Create a React app inside the folder:
 
@@ -67,6 +68,7 @@ Set up a proxy server inside the *React app's* `package.json`:
   "private": true,
   "proxy": "http://localhost:3001", // ADD THIS
 ```
+(Or whatever port your Express app is running. Since the provided sample `server.js` is using port `3001`, the proxy is set to `3001`.)
 
 The repo comes with some sample server-side functions in the `/actions` folder, there's a `products.js` file there that contains some `products` related functions.
 
