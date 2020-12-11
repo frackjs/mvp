@@ -70,7 +70,19 @@ Set up a proxy server inside the *React app's* `package.json`:
 ```
 (Or whatever port your Express app is running. Since the provided sample `server.js` is using port `3001`, the proxy is set to `3001`.)
 
-The repo comes with some sample server-side functions in the `/actions` folder, there's a `products.js` file there that contains some `products` related functions.
+Normally, you would also have to set up `npm-watch`, but this demo app comes with `npm-watch` as a dependency and the following setup in `package.json`:
+
+```js
+  ...
+  "watch": {
+    "frack": "actions"
+  },
+  "scripts": {
+    "frack": "frack",
+    "frack-watch": "npm-watch",
+```
+
+This repo also comes with some sample server-side functions in the `/actions` folder, there's a `products.js` file there that contains some `products` related functions.
 
 You can run the server to start generating the corresponding routes and fetchers.
 
