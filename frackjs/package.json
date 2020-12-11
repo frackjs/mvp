@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "bin": {
-    "frack": "./bin/frackjs"
+    "frack": "./bin/frack"
   },
   "bugs": {
     "url": "https://github.com/frackjs/frackjs/issues"
