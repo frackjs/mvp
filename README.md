@@ -73,7 +73,7 @@ The repo comes with some sample server-side functions in the `/actions` folder, 
 You can run the server to start generating the corresponding routes and fetchers.
 
 ```
-npm run serve
+npm run watch 
 ```
 
 Whenever the `/actions/products.js` file is changed, the generator will produce the new versions of routes and fetchers. By the default, the routes will be created in `/actionsRoutes` and the fetchers will be placed in `/client/src/actions`. And by default FrackJS will look for the source functions from the `/actions` folder in the root directory.
